@@ -1,0 +1,176 @@
+---
+// CateringCalculator.astro
+---
+
+<div class="card p-6 md:p-8 bg-gradient-to-br from-white to-cream border border-cream-dark shadow-lg max-w-2xl mx-auto" id="interactive-calculator">
+  <div class="text-center mb-6">
+    <div class="inline-block bg-sage/10 text-sage-dark font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-2">
+      ⚡ Kalkulator Instan
+    </div>
+    <h3 class="text-xl md:text-2xl font-bold" style="font-family: var(--font-heading);">Simulasi Harga & Pesan Instan</h3>
+    <p class="text-sm text-gray-500 mt-1">Sesuaikan jumlah porsi untuk melihat estimasi dan kirim rincian langsung ke WhatsApp.</p>
+  </div>
+
+  <!-- Step 1: Pilihan Paket -->
+  <div class="mb-6">
+    <label class="block text-sm font-semibold text-gray-700 mb-3" style="font-family: var(--font-heading);">1. Pilih Jenis Layanan</label>
+    <div class="tab-container" id="calc-tabs">
+      <button class="tab-btn active" data-package="harian" data-price="25000">Katering Harian</button>
+      <button class="tab-btn" data-package="snack" data-price="20000">Snack Box</button>
+      <button class="tab-btn" data-package="nasi" data-price="30000">Nasi Box</button>
+    </div>
+  </div>
+
+  <!-- Step 2: Slider Jumlah Porsi -->
+  <div class="mb-6">
+    <div class="flex justify-between items-center mb-2">
+      <label class="block text-sm font-semibold text-gray-700" style="font-family: var(--font-heading);">2. Jumlah Porsi / Box</label>
+      <span class="text-lg font-bold text-sage-dark" id="portion-display">30 Porsi</span>
+    </div>
+    <input type="range" min="10" max="200" value="30" step="5" class="range-slider" id="portion-slider" />
+    <div class="flex justify-between text-xs text-gray-400 mt-1">
+      <span>Min. 10</span>
+      <span>100</span>
+      <span>Max. 200</span>
+    </div>
+  </div>
+
+  <!-- Step 3: Tambahan/Opsi khusus (Interactive Checkboxes) -->
+  <div class="mb-6">
+    <label class="block text-sm font-semibold text-gray-700 mb-3" style="font-family: var(--font-heading);">3. Opsi Tambahan</label>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <label class="flex items-center gap-3 p-3 rounded-lg border border-cream-dark bg-white/50 cursor-pointer hover:bg-white transition-smooth">
+        <input type="checkbox" id="opt-sendok" class="w-4 h-4 accent-sage shrink-0" />
+        <div class="text-left">
+          <p class="text-sm font-medium text-gray-800">Sendok & Garpu Kayu</p>
+          <p class="text-xs text-gray-400">Higienis & ramah lingkungan (+Rp1.000/pax)</p>
+        </div>
+      </label>
+      <label class="flex items-center gap-3 p-3 rounded-lg border border-cream-dark bg-white/50 cursor-pointer hover:bg-white transition-smooth">
+        <input type="checkbox" id="opt-sambal" class="w-4 h-4 accent-sage shrink-0" />
+        <div class="text-left">
+          <p class="text-sm font-medium text-gray-800">Extra Sambal</p>
+          <p class="text-xs text-gray-400">Pecinta kuliner pedas (+Rp1.500/pax)</p>
+        </div>
+      </label>
+    </div>
+  </div>
+
+  <!-- Step 4: Live Estimate Screen Card -->
+  <div class="p-6 rounded-xl bg-sage-dark text-white shadow-inner mb-6 text-center">
+    <p class="text-xs text-white/70 uppercase tracking-widest mb-1 font-semibold">Estimasi Total Biaya</p>
+    <div class="text-3xl md:text-4xl font-extrabold" style="font-family: var(--font-heading);" id="calc-total">
+      Rp 750.000
+    </div>
+    <div class="flex justify-center gap-4 text-xs text-white/80 mt-3 pt-3 border-t border-white/10" id="calc-details">
+      <span>Paket: Katering Harian</span>
+      <span>•</span>
+      <span>Porsi: 30 pax</span>
+    </div>
+  </div>
+
+  <!-- CTA Order Button -->
+  <button
+    id="calc-wa-btn"
+    class="w-full btn-wa justify-center text-base md:text-lg py-4 shadow-md transition-all hover:scale-[1.01]"
+  >
+    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.553 4.104 1.519 5.834L0 24l6.335-1.652A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82c-1.92 0-3.748-.508-5.37-1.457l-.385-.228-3.997 1.046 1.07-3.898-.251-.398A9.818 9.818 0 012.18 12c0-5.404 4.416-9.82 9.82-9.82 5.404 0 9.82 4.416 9.82 9.82 0 5.404-4.416 9.82-9.82 9.82z"/></svg>
+    <span>Kirim Rincian Pemesanan</span>
+  </button>
+</div>
+
+<script>
+  function initCalculator() {
+    const tabs = document.querySelectorAll('#calc-tabs button');
+    const slider = document.getElementById('portion-slider') as HTMLInputElement;
+    const display = document.getElementById('portion-display');
+    const totalDisplay = document.getElementById('calc-total');
+    const detailsDisplay = document.getElementById('calc-details');
+    const optSendok = document.getElementById('opt-sendok') as HTMLInputElement;
+    const optSambal = document.getElementById('opt-sambal') as HTMLInputElement;
+    const btnWA = document.getElementById('calc-wa-btn');
+
+    if (!slider || !totalDisplay || !btnWA) return;
+
+    let currentBasePrice = 25000;
+    let packageName = "Katering Harian";
+
+    // Format number to IDR
+    function formatIDR(num: number) {
+      return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(num);
+    }
+
+    // Dynamic calculations
+    function calculate() {
+      const portions = parseInt(slider.value);
+      if (display) display.textContent = `${portions} Box / Porsi`;
+
+      let pricePerUnit = currentBasePrice;
+      let addonDetails = [];
+
+      if (optSendok && optSendok.checked) {
+        pricePerUnit += 1000;
+        addonDetails.push("Sendok & Garpu Kayu");
+      }
+      if (optSambal && optSambal.checked) {
+        pricePerUnit += 1500;
+        addonDetails.push("Extra Sambal");
+      }
+
+      const total = pricePerUnit * portions;
+      totalDisplay.textContent = formatIDR(total);
+
+      let addonText = addonDetails.length > 0 ? ` + Addon: ${addonDetails.join(", ")}` : "";
+      if (detailsDisplay) {
+        detailsDisplay.textContent = `Paket: ${packageName} • Porsi: ${portions} pax${addonText}`;
+      }
+
+      // Generate WhatsApp link
+      let text = `Halo Dapur Amara,%20saya%20tertarik%20untuk%20memesan%20katering.%0A%0A*Rincian%20Simulasi:*%0A-%20*Paket:*%20${packageName}%0A-%20*Jumlah:*%20${portions}%20pax%0A`;
+      if (addonDetails.length > 0) {
+        text += `-%20*Tambahan:*%20${addonDetails.join(", ")}%0A`;
+      }
+      text += `-%20*Estimasi%20Total:*%20${formatIDR(total)}%0A%0A Mohon%20info%20ketersediaan%20dan%20cara%20pembayaran%20ya.%20Terima%20kasih!`;
+      
+      btnWA.setAttribute('data-link', `https://wa.me/6289668042294?text=${text}`);
+    }
+
+    // Tab switcher events
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentBasePrice = parseInt(tab.getAttribute('data-price') || '25000');
+        packageName = tab.textContent || "Katering";
+        calculate();
+      });
+    });
+
+    // Input events
+    slider.addEventListener('input', calculate);
+    if (optSendok) optSendok.addEventListener('change', calculate);
+    if (optSambal) optSambal.addEventListener('change', calculate);
+
+    // Click event
+    btnWA.addEventListener('click', () => {
+      const link = btnWA.getAttribute('data-link');
+      if (link) {
+        window.open(link, '_blank', 'noopener');
+      }
+    });
+
+    // Initial run
+    calculate();
+  }
+
+  // Bind on load
+  initCalculator();
+
+  // Bind on Astro transitions
+  document.addEventListener('astro:after-swap', initCalculator);
+</script>

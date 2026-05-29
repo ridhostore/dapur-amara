@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MenuCard from '../components/MenuCard.astro';
+import CateringCalculator from '../components/CateringCalculator.astro';
 
 const menuItems = [
   {
@@ -10,6 +11,7 @@ const menuItems = [
     image: '/images/catering-harian.png',
     imageAlt: 'Paket katering harian Dapur Amara dengan nasi dan lauk pauk lengkap',
     waText: 'Halo,%20saya%20ingin%20tanya%20soal%20katering%20harian,%20bisa%20request%20menu?',
+    category: 'harian'
   },
   {
     title: 'Snack Box Meeting',
@@ -18,6 +20,7 @@ const menuItems = [
     image: '/images/snack-box.png',
     imageAlt: 'Snack box meeting Dapur Amara dengan aneka kue dan camilan',
     waText: 'Saya%20butuh%20snack%20box%20untuk%20meeting,%20bisa%20dibantu%20detailnya?',
+    category: 'snack'
   },
   {
     title: 'Nasi Box Hajatan',
@@ -26,6 +29,7 @@ const menuItems = [
     image: '/images/nasi-box.png',
     imageAlt: 'Nasi box hajatan Dapur Amara untuk acara dan syukuran',
     waText: 'Info%20nasi%20box%20hajatan%20ya,%20terima%20kasih.',
+    category: 'nasi'
   },
 ];
 ---
@@ -35,27 +39,42 @@ const menuItems = [
   description="Lihat pilihan paket katering harian, snack box meeting, dan nasi box hajatan dari Dapur Amara. Harga terjangkau, menu bisa disesuaikan."
 >
   <!-- Page Header -->
-  <section class="section-padding" style="background-color: var(--color-cream);" id="menu-header">
+  <section class="section-padding pb-6" style="background-color: var(--color-cream);" id="menu-header">
     <div class="container text-center">
       <h1 class="mb-4" style="font-family: var(--font-heading);">Menu &amp; Pilihan Paket</h1>
-      <p class="max-w-2xl mx-auto" style="color: var(--color-text-secondary);">
+      <p class="max-w-2xl mx-auto text-sm md:text-base mb-6" style="color: var(--color-text-secondary);">
         Harga yang tercantum adalah estimasi. Silakan hubungi kami untuk penawaran terbaik sesuai kebutuhan Anda.
       </p>
+
+      <!-- Category Filter Tabs (Ultra Mobile Friendly) -->
+      <div class="tab-container" id="menu-filters">
+        <button class="tab-btn active" data-filter="all">Semua</button>
+        <button class="tab-btn" data-filter="harian">Harian</button>
+        <button class="tab-btn" data-filter="snack">Snack Box</button>
+        <button class="tab-btn" data-filter="nasi">Nasi Box</button>
+      </div>
     </div>
   </section>
 
   <!-- Menu Cards -->
-  <section class="section-padding bg-white" id="menu-cards">
+  <section class="section-padding bg-white pt-10" id="menu-cards">
     <div class="container">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-16" id="menu-items-grid">
         {menuItems.map(item => (
-          <MenuCard {...item} />
+          <div class="menu-item-wrapper transition-all duration-300" data-category={item.category}>
+            <MenuCard {...item} />
+          </div>
         ))}
       </div>
 
+      <!-- Live Interactive Calculator Widget -->
+      <div class="mb-12">
+        <CateringCalculator />
+      </div>
+
       <!-- Additional Info -->
-      <div class="mt-12 p-6 rounded-xl text-center" style="background-color: var(--color-cream);" id="menu-note">
-        <p class="flex items-center justify-center gap-2 text-sm" style="color: var(--color-text-secondary);">
+      <div class="mt-12 p-6 rounded-xl text-center border border-cream-dark" style="background-color: var(--color-cream);" id="menu-note">
+        <p class="flex items-center justify-center gap-2 text-xs md:text-sm" style="color: var(--color-text-secondary);">
           <svg class="w-5 h-5 shrink-0" style="color: var(--color-sage);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
           Menu dapat disesuaikan. Hubungi kami untuk opsi diet khusus atau request menu tertentu.
         </p>
@@ -63,3 +82,48 @@ const menuItems = [
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  function initMenuFilter() {
+    const filters = document.querySelectorAll('#menu-filters button');
+    const items = document.querySelectorAll('.menu-item-wrapper');
+
+    if (filters.length === 0 || items.length === 0) return;
+
+    filters.forEach(filter => {
+      filter.addEventListener('click', () => {
+        // Toggle Active Tab class
+        filters.forEach(f => f.classList.remove('active'));
+        filter.classList.add('active');
+
+        const category = filter.getAttribute('data-filter');
+
+        // Perform visual filter list animation
+        items.forEach(item => {
+          const itemCategory = item.getAttribute('data-category');
+          
+          if (category === 'all' || itemCategory === category) {
+            (item as HTMLElement).style.display = 'block';
+            setTimeout(() => {
+              (item as HTMLElement).style.opacity = '1';
+              (item as HTMLElement).style.transform = 'scale(1)';
+            }, 50);
+          } else {
+            (item as HTMLElement).style.opacity = '0';
+            (item as HTMLElement).style.transform = 'scale(0.95)';
+            setTimeout(() => {
+              (item as HTMLElement).style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+  }
+
+  // Bind on load
+  initMenuFilter();
+
+  // Bind on Astro transitions
+  document.addEventListener('astro:after-swap', initMenuFilter);
+</script>
+

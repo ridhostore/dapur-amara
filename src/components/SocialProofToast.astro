@@ -1,0 +1,104 @@
+---
+// SocialProofToast.astro
+---
+
+<div class="social-proof-toast" id="social-proof">
+  <!-- Small Avatar / Icon -->
+  <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold shrink-0 shadow-inner bg-sage" id="toast-avatar">
+    WA
+  </div>
+  <div class="flex-1 text-left">
+    <p class="text-xs font-semibold text-gray-800" id="toast-title">Seseorang baru saja memesan!</p>
+    <p class="text-xxs text-gray-500 mt-0.5" id="toast-desc">Paket Katering Harian • 20 Porsi</p>
+    <p class="text-4xs text-sage-dark font-medium mt-0.5" id="toast-time">Baru saja • terverifikasi ✓</p>
+  </div>
+  <button id="toast-close" class="text-gray-300 hover:text-gray-500 transition-smooth p-0.5" aria-label="Close notification">
+    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+</div>
+
+<style>
+  .text-xxs {
+    font-size: 0.75rem;
+  }
+  .text-4xs {
+    font-size: 0.65rem;
+  }
+</style>
+
+<script>
+  function initToast() {
+    const toast = document.getElementById('social-proof');
+    const avatar = document.getElementById('toast-avatar');
+    const title = document.getElementById('toast-title');
+    const desc = document.getElementById('toast-desc');
+    const time = document.getElementById('toast-time');
+    const closeBtn = document.getElementById('toast-close');
+
+    if (!toast || !avatar || !title || !desc || !time) return;
+
+    const data = [
+      { name: "Ibu Rina", initials: "IR", desc: "Langganan Katering Harian • 2 Porsi", location: "Kebayoran Baru" },
+      { name: "Pak Budi", initials: "PB", desc: "Memesan 30 Nasi Box Hajatan", location: "Kuningan" },
+      { name: "Aria Wijaya", initials: "AW", desc: "Memesan 50 Snack Box Meeting", location: "Sudirman" },
+      { name: "Ibu Dewi", initials: "ID", desc: "Katering Harian • Keluarga 4 Porsi", location: "Cilandak" },
+      { name: "Hasan", initials: "HS", desc: "Memesan 100 Nasi Box Syukuran", location: "Pondok Indah" },
+      { name: "Siti Rahma", initials: "SR", desc: "Memesan 25 Snack Box Kantor", location: "Senayan" }
+    ];
+
+    let timer: number;
+    let cycleTimer: number;
+
+    function showRandomOrder() {
+      const item = data[Math.floor(Math.random() * data.length)];
+      
+      avatar.textContent = item.initials;
+      title.innerHTML = `<strong>${item.name}</strong> dari ${item.location}`;
+      desc.textContent = item.desc;
+      
+      const timeOptions = ["1 menit yang lalu", "3 menit yang lalu", "Baru saja", "5 menit yang lalu"];
+      time.textContent = `${timeOptions[Math.floor(Math.random() * timeOptions.length)]} • terverifikasi ✓`;
+
+      toast.classList.add('show');
+
+      // Auto hide after 6 seconds
+      timer = window.setTimeout(() => {
+        toast.classList.remove('show');
+      }, 6000);
+    }
+
+    // Close action
+    closeBtn?.addEventListener('click', () => {
+      toast.classList.remove('show');
+      clearTimeout(timer);
+    });
+
+    // Start cycle after 4 seconds
+    cycleTimer = window.setInterval(() => {
+      // Don't interrupt if already open
+      if (!toast.classList.contains('show')) {
+        showRandomOrder();
+      }
+    }, 18000);
+
+    // Initial show
+    setTimeout(showRandomOrder, 3000);
+
+    // Store references on window for cleanup during view transition swap
+    (window as any)._toastIntervals = { timer, cycleTimer };
+  }
+
+  // Bind on load
+  initToast();
+
+  // Bind on Astro transitions
+  document.addEventListener('astro:after-swap', () => {
+    // Clean up old timers
+    const old = (window as any)._toastIntervals;
+    if (old) {
+      clearTimeout(old.timer);
+      clearInterval(old.cycleTimer);
+    }
+    initToast();
+  });
+</script>

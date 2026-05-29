@@ -7,8 +7,8 @@
   --color-sage-light: #8FB382;
   --color-cream: #F9F4EE;
   --color-cream-dark: #F0E8DD;
-  --color-wa: #25D366;
-  --color-wa-hover: #1DA851;
+  --color-wa: #1E8C43; /* Deeper Forest Green for WCAG AAA 4.5:1 white text contrast compliance */
+  --color-wa-hover: #15622E;
   --color-text: #333333;
   --color-text-secondary: #666666;
   --color-white: #FFFFFF;

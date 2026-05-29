@@ -19,5 +19,8 @@
   },
   "overrides": {
     "vite": "^7"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
   }
 }

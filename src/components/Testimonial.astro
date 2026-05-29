@@ -63,27 +63,27 @@ const advantages = [
                   <svg class="w-3.5 h-3.5 star" viewBox="0 0 24 24" fill={index < 4 ? "currentColor" : "none"} stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 ))}
               </div>
-              <p class="text-4xs text-gray-500 font-medium">Berdasarkan 2.185 Ulasan Google</p>
+              <p class="text-xs text-gray-600 font-medium">Berdasarkan 2.185 Ulasan Google</p>
             </div>
 
             <!-- Col 2: Star Bars -->
             <div class="sm:col-span-7 space-y-1">
               <!-- 5 Stars Bar -->
-              <div class="flex items-center gap-2 text-4xs text-gray-500">
+              <div class="flex items-center gap-2 text-xs text-gray-600">
                 <span class="w-3 text-right">5</span>
                 <div class="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
                   <div class="h-full bg-yellow-500 rounded-full" style="width: 78%;"></div>
                 </div>
               </div>
               <!-- 4 Stars Bar -->
-              <div class="flex items-center gap-2 text-4xs text-gray-500">
+              <div class="flex items-center gap-2 text-xs text-gray-600">
                 <span class="w-3 text-right">4</span>
                 <div class="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
                   <div class="h-full bg-yellow-500 rounded-full" style="width: 14%;"></div>
                 </div>
               </div>
               <!-- 3 Stars Bar -->
-              <div class="flex items-center gap-2 text-4xs text-gray-500">
+              <div class="flex items-center gap-2 text-xs text-gray-600">
                 <span class="w-3 text-right">3</span>
                 <div class="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
                   <div class="h-full bg-yellow-500 rounded-full" style="width: 5%;"></div>
@@ -111,13 +111,13 @@ const advantages = [
                     <span class="font-bold text-xs text-gray-800" style="font-family: var(--font-heading);">Bambang Wijaya</span>
                     <svg class="w-3 h-3 text-blue-500 shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                   </div>
-                  <span class="text-5xs text-amber-600 font-semibold flex items-center gap-0.5">
-                    <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                  <span class="text-xs text-amber-800 font-semibold flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 fill-current text-yellow-600" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                     Local Guide • 108 Ulasan
                   </span>
                 </div>
               </div>
-              <span class="text-5xs text-gray-400">1 minggu yang lalu</span>
+              <span class="text-xs text-gray-500 font-medium">1 minggu yang lalu</span>
             </div>
             <div class="flex gap-0.5 mb-1.5">
               {[1,2,3,4,5].map(() => (
@@ -141,13 +141,13 @@ const advantages = [
                     <span class="font-bold text-xs text-gray-800" style="font-family: var(--font-heading);">Siti Rahmawati</span>
                     <svg class="w-3 h-3 text-blue-500 shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                   </div>
-                  <span class="text-5xs text-amber-600 font-semibold flex items-center gap-0.5">
-                    <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                  <span class="text-xs text-amber-800 font-semibold flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 fill-current text-yellow-600" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                     Local Guide • 57 Ulasan
                   </span>
                 </div>
               </div>
-              <span class="text-5xs text-gray-400">3 minggu yang lalu</span>
+              <span class="text-xs text-gray-500 font-medium">3 minggu yang lalu</span>
             </div>
             <div class="flex gap-0.5 mb-1.5">
               {[1,2,3,4,5].map(() => (
@@ -176,7 +176,7 @@ const advantages = [
 
         <!-- Google Maps Footer Links -->
         <div class="bg-gray-50 border-t border-gray-100 p-3.5 text-center flex flex-col sm:flex-row items-center justify-between gap-3">
-          <span class="text-5xs text-gray-400">Sinkronisasi Real-Time Peta &amp; Ulasan Terbuka</span>
+          <span class="text-xs text-gray-500 font-medium">Sinkronisasi Real-Time Peta &amp; Ulasan Terbuka</span>
           <a
             href="https://maps.app.goo.gl/XoSK9vwCVE6vap6u9"
             target="_blank"

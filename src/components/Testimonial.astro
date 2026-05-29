@@ -1,0 +1,59 @@
+---
+const advantages = [
+  {
+    title: 'Request menu bebas',
+    desc: 'Menu bisa disesuaikan dengan selera dan budget Anda.',
+  },
+  {
+    title: 'Bahan segar pasar pagi',
+    desc: 'Kami belanja langsung tiap pagi, bukan bahan beku.',
+  },
+  {
+    title: 'Kemasan higienis & ramah lingkungan',
+    desc: 'Menggunakan kotak karton food grade.',
+  },
+];
+---
+
+<section class="section-padding bg-white" id="kenapa-section">
+  <div class="container">
+    <h2 class="text-center mb-12" style="font-family: var(--font-heading);">Kenapa Dapur Amara?</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+      <!-- Advantages -->
+      <div class="space-y-6">
+        {advantages.map((item, i) => (
+          <div class="flex items-start gap-4" id={`advantage-${i}`}>
+            <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-0.5" style="background-color: rgba(122, 157, 109, 0.15);">
+              <svg class="w-4 h-4" style="color: var(--color-sage);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <h3 class="text-base font-semibold mb-1" style="font-family: var(--font-heading); color: var(--color-text);">{item.title}</h3>
+              <p class="text-sm" style="color: var(--color-text-secondary);">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Testimonial -->
+      <div class="card p-6 md:p-8" id="testimonial-card">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg" style="background-color: var(--color-sage); font-family: var(--font-heading);">
+            IR
+          </div>
+          <div>
+            <p class="font-semibold text-sm" style="font-family: var(--font-heading); color: var(--color-text);">Ibu Rina</p>
+            <p class="text-xs" style="color: var(--color-text-secondary);">Pelanggan Setia</p>
+          </div>
+        </div>
+        <blockquote class="text-base italic leading-relaxed mb-4" style="color: var(--color-text);">
+          "Makanannya enak, pas di kantong. Saya langganan untuk bekal kantor. Porsinya banyak!"
+        </blockquote>
+        <div class="flex gap-1">
+          {[1,2,3,4,5].map(() => (
+            <svg class="w-4 h-4 star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

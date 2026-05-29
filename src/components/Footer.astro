@@ -1,0 +1,66 @@
+---
+const waLink = 'https://wa.me/6289668042294?text=Halo%20Dapur%20Amara,%20saya%20tertarik%20dengan%20katering.%20Bisa%20minta%20info%20lengkap?';
+---
+
+<footer class="text-white" style="background-color: var(--color-sage-dark);" id="main-footer">
+  <div class="container section-padding">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+
+      <!-- Brand Info -->
+      <div>
+        <h3 class="text-xl font-bold mb-4 text-white" style="font-family: var(--font-heading);">
+          Dapur Amara
+        </h3>
+        <address class="not-italic text-white/80 text-sm leading-relaxed space-y-2">
+          <p class="flex items-start gap-2">
+            <!-- Map Pin Icon -->
+            <svg class="w-4 h-4 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Jl. Melati No. 12, Kebayoran Baru, Jakarta Selatan
+          </p>
+          <p class="flex items-start gap-2">
+            <!-- Clock Icon -->
+            <svg class="w-4 h-4 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Senin–Sabtu, 08.00–16.00
+          </p>
+        </address>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-lg font-bold mb-4 text-white" style="font-family: var(--font-heading);">
+          Tautan Cepat
+        </h3>
+        <nav aria-label="Tautan footer" class="flex flex-col gap-2">
+          <a href="/" class="text-white/80 hover:text-white hover:underline transition-smooth text-sm">Beranda</a>
+          <a href="/menu" class="text-white/80 hover:text-white hover:underline transition-smooth text-sm">Menu &amp; Harga</a>
+          <a href="/kontak" class="text-white/80 hover:text-white hover:underline transition-smooth text-sm">Kontak</a>
+        </nav>
+      </div>
+
+      <!-- CTA Mini -->
+      <div>
+        <h3 class="text-lg font-bold mb-4 text-white" style="font-family: var(--font-heading);">
+          Hubungi Kami
+        </h3>
+        <p class="text-white/80 text-sm mb-4">
+          Siap memesan? Hubungi kami langsung via WhatsApp untuk pemesanan cepat.
+        </p>
+        <a
+          href={waLink}
+          target="_blank"
+          rel="noopener"
+          class="btn-wa-outline"
+          id="footer-wa-btn"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.553 4.104 1.519 5.834L0 24l6.335-1.652A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82c-1.92 0-3.748-.508-5.37-1.457l-.385-.228-3.997 1.046 1.07-3.898-.251-.398A9.818 9.818 0 012 2.18c5.404 0 9.82 4.416 9.82 9.82 0 5.404-4.416 9.82-9.82 9.82z"/></svg>
+          <span>Pesan via WhatsApp</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="mt-10 pt-6 border-t border-white/20 text-center text-white/60 text-sm">
+      <p>© 2026 Dapur Amara. Dibuat oleh <a href="https://ridhowebs.biz.id" class="text-white/80 hover:text-white underline transition-smooth">RidhoWebs</a></p>
+    </div>
+  </div>
+</footer>

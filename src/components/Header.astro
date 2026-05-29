@@ -1,0 +1,128 @@
+---
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Beranda' },
+  { href: '/menu', label: 'Menu' },
+  { href: '/kontak', label: 'Kontak' },
+];
+---
+
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100" id="main-header">
+  <div class="container flex items-center justify-between h-16 md:h-18">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-2 no-underline" id="header-logo">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" fill="#7A9D6D" opacity="0.15"/>
+        <path d="M10 22C10 18 12 14 16 12C20 14 22 18 22 22" stroke="#7A9D6D" stroke-width="2" stroke-linecap="round"/>
+        <path d="M16 12V8" stroke="#7A9D6D" stroke-width="2" stroke-linecap="round"/>
+        <path d="M16 8C14 8 12 9 12 11" stroke="#7A9D6D" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M16 8C18 8 20 9 20 11" stroke="#7A9D6D" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="8" y1="22" x2="24" y2="22" stroke="#7A9D6D" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span class="font-heading font-bold text-xl text-sage-dark" style="font-family: var(--font-heading);">
+        Dapur Amara
+      </span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center gap-8" aria-label="Navigasi utama">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class={`nav-link ${currentPath === link.href ? 'active' : ''}`}
+          aria-current={currentPath === link.href ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Mobile Menu Toggle -->
+    <button
+      id="mobile-menu-toggle"
+      class="md:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-gray-50 transition-smooth"
+      aria-label="Toggle menu navigasi"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="block w-6 h-0.5 bg-gray-700 transition-all duration-200 origin-center" id="hamburger-top"></span>
+      <span class="block w-6 h-0.5 bg-gray-700 transition-all duration-200" id="hamburger-mid"></span>
+      <span class="block w-6 h-0.5 bg-gray-700 transition-all duration-200 origin-center" id="hamburger-bot"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <nav
+    id="mobile-menu"
+    class="md:hidden overflow-hidden transition-all duration-300 max-h-0 opacity-0"
+    aria-label="Navigasi mobile"
+  >
+    <div class="container pb-4 flex flex-col gap-1">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class={`block py-3 px-4 rounded-lg text-base font-medium transition-smooth ${
+            currentPath === link.href
+              ? 'bg-sage/10 text-sage-dark'
+              : 'text-gray-700 hover:bg-gray-50'
+          }`}
+          style="font-family: var(--font-heading);"
+          aria-current={currentPath === link.href ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>
+
+<script>
+  function initMobileMenu() {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const top = document.getElementById('hamburger-top');
+    const mid = document.getElementById('hamburger-mid');
+    const bot = document.getElementById('hamburger-bot');
+
+    if (!toggle || !menu) return;
+
+    // Reset state on page transition
+    menu.style.maxHeight = '0';
+    menu.style.opacity = '0';
+    toggle.setAttribute('aria-expanded', 'false');
+    if (top) { top.style.transform = ''; top.style.opacity = ''; }
+    if (mid) mid.style.opacity = '';
+    if (bot) { bot.style.transform = ''; bot.style.opacity = ''; }
+
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+
+      if (!isOpen) {
+        menu.style.maxHeight = menu.scrollHeight + 'px';
+        menu.style.opacity = '1';
+        if (top) { top.style.transform = 'translateY(4px) rotate(45deg)'; }
+        if (mid) mid.style.opacity = '0';
+        if (bot) { bot.style.transform = 'translateY(-4px) rotate(-45deg)'; }
+      } else {
+        menu.style.maxHeight = '0';
+        menu.style.opacity = '0';
+        if (top) { top.style.transform = ''; }
+        if (mid) mid.style.opacity = '';
+        if (bot) { bot.style.transform = ''; }
+      }
+    });
+  }
+
+  // Run on initial load
+  initMobileMenu();
+
+  // Re-run after Astro View Transitions
+  document.addEventListener('astro:after-swap', initMobileMenu);
+</script>

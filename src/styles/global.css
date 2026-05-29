@@ -1,0 +1,233 @@
+@import "tailwindcss";
+
+/* ===== Custom Theme (Tailwind v4) ===== */
+@theme {
+  --color-sage: #7A9D6D;
+  --color-sage-dark: #5F7D5C;
+  --color-sage-light: #8FB382;
+  --color-cream: #F9F4EE;
+  --color-cream-dark: #F0E8DD;
+  --color-wa: #25D366;
+  --color-wa-hover: #1DA851;
+  --color-text: #333333;
+  --color-text-secondary: #666666;
+  --color-white: #FFFFFF;
+
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-float: 0 4px 16px rgba(0, 0, 0, 0.2);
+
+  --radius-card: 12px;
+  --radius-btn: 8px;
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1200px;
+}
+
+/* ===== Base Styles ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-text);
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.3rem;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ===== Focus States for Accessibility ===== */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-sage);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ===== Transition Utility ===== */
+.transition-smooth {
+  transition: all 0.2s ease-in-out;
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* ===== WhatsApp Button Styles ===== */
+.btn-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--color-wa);
+  color: white;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  padding: 0.875rem 2rem;
+  border-radius: var(--radius-btn);
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-wa:hover {
+  background-color: var(--color-wa-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.btn-wa-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: white;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-btn);
+  border: 2px solid white;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.btn-wa-outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+/* ===== Card Base ===== */
+.card {
+  background-color: white;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: scale(1.02);
+}
+
+/* ===== Section Padding ===== */
+.section-padding {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+/* ===== Active Nav Link ===== */
+.nav-link {
+  position: relative;
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 500;
+  font-family: var(--font-heading);
+  transition: color 0.2s ease-in-out;
+  padding: 0.25rem 0;
+}
+
+.nav-link:hover {
+  color: var(--color-sage);
+}
+
+.nav-link.active {
+  color: var(--color-sage);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-sage);
+  border-radius: 1px;
+}
+
+/* ===== Star Rating ===== */
+.star {
+  color: #F59E0B;
+}
+
+/* ===== Parallax Hero (Desktop) ===== */
+@media (min-width: 1024px) {
+  .hero-parallax {
+    background-attachment: fixed;
+  }
+}
+
+/* ===== Scrollbar Custom ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-sage);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sage-dark);
+}
